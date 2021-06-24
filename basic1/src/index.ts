@@ -35,3 +35,42 @@ const practice3 = function (): string {
 console.log(practice3() + "!");
 console.log(1 + practice3() ); // I don't like this one!
 
+//////////////////////////////****** practice 4
+//Return Type Annotations
+const practice4 = function (): void {
+    const names = ["Alice", "Bob", "Eve"];
+    //Even though the parameter s didn’t have a type annotation, TypeScript used the types of the forEach function, along with the inferred type of the array, to determine the type s will have.
+    // This process is called contextual typing
+    names.forEach(function (s) {
+        console.log(s.toUpperCase());
+    });
+};
+practice4();
+
+//////////////////////////////****** practice 5
+//Optional Properties
+function printName(obj: { first: string; last?: string }) {
+    // console.log(obj.last.toUpperCase()); Error!
+    if (obj.last !== undefined) {
+        // OK
+        console.log(obj.last.toUpperCase());
+    }
+    // A safe alternative using modern JavaScript syntax:
+    console.log(obj.last?.toUpperCase());
+}
+// Both OK
+printName({ first: "Bob" });
+printName({ first: "Alice", last: "Alisson" });
+
+//////////////////////////////****** practice 6
+// Union and narrowing
+function welcomePeople(x: string[] | string) {
+    if (Array.isArray(x)) {
+        // Here: 'x' is 'string[]'
+        console.log("Hello, " + x.join(" and "));
+    } else {
+        // Here: 'x' is 'string'
+        console.log("Welcome lone traveler " + x);
+    }
+}
+//
