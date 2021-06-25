@@ -57,3 +57,28 @@ interface Circle {
 }
 
 type ColorfulCircle = Colorful & Circle;
+
+type OrNull<Type> = Type | null;
+
+type OneOrMany<Type> = Type | Type[];
+
+type OneOrManyOrNull<Type> = OrNull<OneOrMany<Type>>;
+// type OneOrManyOrNull<Type> = OneOrMany<Type> | null
+
+type OneOrManyOrNullStrings = OneOrManyOrNull<string>;
+
+//////////////////////////////****** practice 5 , other
+//The ReadonlyArray Type == readonly Type[]
+function doStuff(values: ReadonlyArray<string>) {
+  // We can read from 'values'...
+  values.slice();
+  console.log(`The first value is ${values[0]}`);
+
+  // ...but we can't mutate 'values'.
+  // values.push("hello!"); Error 🚫
+}
+
+type StringNumberBooleans = [string, number, ...boolean[]];
+type StringBooleansNumber = [string, ...boolean[], number];
+
+let point = [3, 4] as const; //type equal to : readonly [3, 4]
