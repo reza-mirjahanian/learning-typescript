@@ -173,3 +173,21 @@ type myReturnType = ReturnType<typeof f>;
 // type myReturnType = ReturnType<f>; // We can't use with function directly!
 //Specifically, it’s only legal to use typeof on identifiers (i.e. variable names) or their properties.
 
+//////////////////////////////****** practice 11, Indexed Access Types
+type PersonIndex = { age: number; name: string; alive: boolean };
+type Age = PersonIndex["age"];
+let myAge: Age = 4;
+
+type I1 = PersonIndex["age" | "name"];
+let testI1:I1 = "reza";
+type AliveOrName = "alive" | "name";
+type I3 = PersonIndex[AliveOrName];
+//
+const MyArray = [
+    { name: "Alice", age: 15 },
+    { name: "Bob", age: 23 },
+    { name: "Eve", age: 38 },
+];
+type PersonTest1 = typeof MyArray[number];
+type AgeTest = typeof MyArray[number]["age"];
+type Age2 = Person["age"];
