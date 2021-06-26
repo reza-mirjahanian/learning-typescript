@@ -179,15 +179,62 @@ type Age = PersonIndex["age"];
 let myAge: Age = 4;
 
 type I1 = PersonIndex["age" | "name"];
-let testI1:I1 = "reza";
+let testI1: I1 = "reza";
 type AliveOrName = "alive" | "name";
 type I3 = PersonIndex[AliveOrName];
 //
 const MyArray = [
-    { name: "Alice", age: 15 },
-    { name: "Bob", age: 23 },
-    { name: "Eve", age: 38 },
+    {name: "Alice", age: 15},
+    {name: "Bob", age: 23},
+    {name: "Eve", age: 38},
 ];
 type PersonTest1 = typeof MyArray[number];
 type AgeTest = typeof MyArray[number]["age"];
 type Age2 = Person["age"];
+
+//////////////////////////////****** practice 12, Conditional type
+interface Animal {
+    live(): void;
+}
+
+interface Dog extends Animal {
+    woof(): void;
+}
+
+type Example1 = Dog extends Animal ? number : string; // Condition is True
+type Example2 = RegExp extends Animal ? number : string; // Condition is False
+
+type MessageOf<T> = T extends { message: unknown } ? T["message"] : never;
+
+//
+interface Email {
+    message: string;
+}
+
+interface Dog {
+    bark(): void;
+}
+
+type EmailMessageContents = MessageOf<Email>;
+//type EmailMessageContents = string
+
+type DogMessageContents = MessageOf<Dog>;
+//type DogMessageContents = never
+
+//////////////////////////////****** practice 14, infer keyword
+//Inferring Within Conditional Types
+type Flatten<Type> = Type extends Array<infer Item> ? Item : Type;
+//
+// type Unpromisify<T> = T extends Promise<any> ? T : never
+type Unpromisify<T> = T extends Promise<infer R> ? R : T
+//We check if type extends Promise
+// If it does we extract the type from the promise
+// If it does not leave it as is
+
+//Distributive Conditional Types
+type ToArray<Type> = Type extends any ? Type[] : never;
+type StrArrOrNumArr = ToArray<string | number>; // type StrArrOrNumArr = string[] | number[]
+
+// we use [] to prevent spreading
+type ToArrayNonDist<Type> = [Type] extends [any] ? Type[] : never;
+type StrOrNumArr = ToArrayNonDist<string | number>; //type StrOrNumArr = (string | number)[]
