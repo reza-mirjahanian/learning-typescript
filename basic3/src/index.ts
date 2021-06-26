@@ -109,8 +109,9 @@ function loggingIdentity<Type extends Lengthwise>(arg: Type): Type {
     console.log(arg.length); // Now we know it has a .length property, so no more error
     return arg;
 }
+
 //////////////////////////////****** practice 8 , Class Types in Generics
-function create<Type>(c: { new (): Type }): Type {
+function create<Type>(c: { new(): Type }): Type {
     return new c();
 }
 
@@ -146,7 +147,7 @@ createInstance(Bee).keeper.hasMask;
 //The keyof operator takes an object type and produces a string or numeric literal union of its keys:
 type Point = { x: number; y: number };
 type P = keyof Point;
-let test9 : P=  "x";
+let test9: P = "x";
 test9 = "y";
 //test9 = "z";Error 🚫
 //
@@ -154,4 +155,21 @@ type Mapish = { [k: string]: boolean };
 type M = keyof Mapish;
 //type M = string | number
 //Note that in this example, M is string | number — this is because JavaScript object keys are always coerced to a string, so obj[0] is always the same as obj["0"].
+
+//////////////////////////////****** practice 10, The type operator
+//TypeScript adds a typeof operator you can use in a type context to refer to the type of a variable or property:
+let s = "hello";
+let n: typeof s;
+
+//  ReturnType
+type Predicate = (x: unknown) => boolean;
+type K = ReturnType<Predicate>;  // type K = boolean
+
+function f() {
+    return {x: 10, y: 3};
+}
+
+type myReturnType = ReturnType<typeof f>;
+// type myReturnType = ReturnType<f>; // We can't use with function directly!
+//Specifically, it’s only legal to use typeof on identifiers (i.e. variable names) or their properties.
 
