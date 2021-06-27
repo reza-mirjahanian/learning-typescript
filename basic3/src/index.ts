@@ -238,3 +238,59 @@ type StrArrOrNumArr = ToArray<string | number>; // type StrArrOrNumArr = string[
 // we use [] to prevent spreading
 type ToArrayNonDist<Type> = [Type] extends [any] ? Type[] : never;
 type StrOrNumArr = ToArrayNonDist<string | number>; //type StrOrNumArr = (string | number)[]
+
+////////////////////////////////****** practice 15, Property in keyof Type
+type OptionsFlags<Type> = {
+    [Property in keyof Type]: boolean;
+};
+type FeatureFlags = {
+    darkMode: () => void;
+    newUserProfile: () => void;
+};
+
+type FeatureOptions = OptionsFlags<FeatureFlags>;
+
+let testKeys: FeatureOptions = {
+    darkMode: false,
+    newUserProfile: true
+};
+//There are two additional modifiers which can be applied during mapping: readonly and ? which affect mutability and optionality respectively.
+type CreateMutable<Type> = {
+    -readonly [Property in keyof Type]: Type[Property];
+};
+
+type LockedAccount = {
+    readonly id: string;
+    readonly name: string;
+};
+
+type UnlockedAccount = CreateMutable<LockedAccount>;
+// Removes 'optional' attributes from a type's properties
+type Concrete<Type> = {
+    [Property in keyof Type]-?: Type[Property];
+};
+
+////////////////////////////////****** practice 16,Key Remapping via as
+// type Getters<Type> = {
+//     [Property in keyof Type as `get${Capitalize<string & Property>}`]: () => Type[Property]
+// };
+//
+// interface Person {
+//     name: string;
+//     age: number;
+//     location: string;
+// }
+//
+// type LazyPerson = Getters<Person>;
+
+// Remove the 'kind' property
+// type RemoveKindField<Type> = {
+//     [Property in keyof Type as Exclude<Property, "kind">]: Type[Property]
+// };
+//
+// interface Circle {
+//     kind: "circle";
+//     radius: number;
+// }
+//
+// type KindlessCircle = RemoveKindField<Circle>;
