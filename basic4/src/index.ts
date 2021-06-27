@@ -46,3 +46,35 @@
 // type MainID = ASCIICacheKey<"my_app">
 
 // Capitalize<StringType>
+
+//////////////////////////////****** practice 3 , Some Tips
+// Use structural typing to facilitate unit testing.
+// Limit Use of the any Type
+
+interface Person {
+    name: string;
+}
+
+interface Lifespan {
+    birth: Date;
+    death?: Date;
+}
+
+type PersonSpan = Person & Lifespan;
+const ps: PersonSpan = {
+    name: 'Alan Turing',
+    birth: new Date('2021/06/23'),
+    death: new Date('2029/06/07'),
+};
+
+//keyof (A&B) = (keyof A) | (keyof B)
+// keyof (A|B) = (keyof A) & (keyof B)
+type K = keyof (Person | Lifespan); // k is Never
+type T = keyof (Person & Lifespan);
+type P = Person | Lifespan;
+let testT: T = "name";
+let testP: P = {birth: new Date('2029/06/07'), death: new Date('2029/06/07'),};
+testP = {birth: new Date('2029/06/07')};
+
+//https://www.typescriptlang.org/docs/handbook/utility-types.html
+
