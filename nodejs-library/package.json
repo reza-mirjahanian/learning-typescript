@@ -1,0 +1,24 @@
+{
+  "name": "nodejs-library",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/main.ts",
+  "scripts": {
+    "start": "npm run build:live",
+    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/main.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^8.0.46",
+    "avro-js": "^1.8.2",
+    "nodemon": "^1.12.1",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.5.3"
+  },
+  "dependencies": {
+    "snappy": "^6.0.1",
+    "space-lift": "^0.6.0"
+  }
+}
