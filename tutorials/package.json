@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha -r ts-node/register src/**/*.test.ts",
     "start": "npm run build:live",
-    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/main/main.ts",
+    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/ambient/CalcTest.ts",
     "test:live": "nodemon --exec mocha -r ts-node/register src/**/*.test.ts"
   },
   "keywords": [],
