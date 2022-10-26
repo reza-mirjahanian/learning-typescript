@@ -71,6 +71,18 @@ interface Hello {
 
 const sayHello: Hello = (input) => 'salam'
 
+
+interface Options {
+    width: number;
+}
+
+function configure(x: Options | "auto") {
+    // ...
+}
+
+configure({width: 100});
+configure("auto");
+
 ///////////////// Type Alias
 
 type youtuber = {
