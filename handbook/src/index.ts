@@ -1,6 +1,9 @@
 
-const init = async () => {
- console.log('hi')
-};
-init().then(() => {});
+
+
+
+// const init = async () => {
+//  console.log('hi')
+// };
+// init().then(() => {});
 
