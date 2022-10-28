@@ -4,7 +4,7 @@
   "description": "",
   "main": "src",
   "scripts": {
-    "start": " ts-node ./src",
+    "start": "ts-node ./src",
     "start-watch": "nodemon --config nodemon.json -x npm start",
     "test": "cross-env NODE_ENV='test' ts-node ./node_modules/mocha/bin/mocha  --ui tdd  --timeout=10000 --exit ./test/**/*.spec.ts",
     "test-watch": "nodemon --config nodemon.json  -x npm run test",
