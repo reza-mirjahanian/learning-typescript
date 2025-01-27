@@ -102,6 +102,8 @@
   type T = Ambiguous<{ a: string, b: number }>; // `string | number`
   ```
 
+
+
 ---
 
 #### **9. Best Practices**
